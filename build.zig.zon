@@ -1,0 +1,15 @@
+.{
+    .name = "binpeek",
+    .version = "0.1.0",
+    .paths = .{
+        "src",
+        "build.zig",
+        "build.zig.zon",
+    },
+    .dependencies = .{
+        .ztoml = .{
+            .url = "https://github.com/strvdr/ztoml/archive/zduel-integration.tar.gz",
+            .hash = "122061da9bc6791a1a033b5ade20435d1fa04aa785ba59d17f769e85554ff0960746",  // This placeholder will make Zig tell us the correct hash
+        },
+    },
+}
