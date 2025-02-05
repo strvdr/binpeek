@@ -89,8 +89,8 @@ pub fn main() !void {
     _ = args.skip();
 
     const filename = args.next() orelse {
-        std.debug.print("Usage: binpeek <filename>/n", .{});
-        return error.MissingFilename;
+        std.debug.print("Invalid usage. Try: binpeek <filename>", .{});
+        return;
     };
 
     const file = try std.fs.cwd().openFile(filename, .{});
@@ -115,6 +115,10 @@ pub fn main() !void {
                         try stdout.print(" {s}{x:0>2}{s}", .{ colors.bold, byte, colors.reset });
                     } else if (byte >= 36 and byte <= 126) {
                         try stdout.print(" {s}{s}{x:0>2}{s}", .{ colors.bold, colors.asciiColors, byte, colors.reset });
+                    } else if (byte == 10 or byte == 9 or byte == 26 or byte == 13) {
+                        try stdout.print(" {s}{s}{x:0>2}{s}", .{ colors.bold, colors.escapeColors, byte, colors.reset });
+                    } else if (byte == 255 or byte == 127 or byte == 32) {
+                        try stdout.print(" {s}{s}{x:0>2}{s}", .{ colors.bold, colors.formatColors, byte, colors.reset });
                     } else {
                         try stdout.print(" {s}{s}{x:0>2}{s}", .{ colors.bold, colors.binColors, byte, colors.reset });
                     }
@@ -123,6 +127,10 @@ pub fn main() !void {
                         try stdout.print("{s}{x:0>2}{s}", .{ colors.bold, byte, colors.reset });
                     } else if (byte >= 36 and byte <= 126) {
                         try stdout.print("{s}{s}{x:0>2}{s}", .{ colors.bold, colors.asciiColors, byte, colors.reset });
+                    } else if (byte == 10 or byte == 9 or byte == 26 or byte == 13) {
+                        try stdout.print("{s}{s}{x:0>2}{s}", .{ colors.bold, colors.escapeColors, byte, colors.reset });
+                    } else if (byte == 255 or byte == 127 or byte == 32) {
+                        try stdout.print("{s}{s}{x:0>2}{s}", .{ colors.bold, colors.formatColors, byte, colors.reset });
                     } else {
                         try stdout.print("{s}{s}{x:0>2}{s}", .{ colors.bold, colors.binColors, byte, colors.reset });
                     }
@@ -136,6 +144,10 @@ pub fn main() !void {
                     try stdout.print("{s}.{s}", .{ colors.bold, colors.reset });
                 } else if (byte >= 36 and byte <= 126) {
                     try stdout.print("{s}{s}{c}{s}", .{ colors.bold, colors.asciiColors, byte, colors.reset });
+                } else if (byte == 10 or byte == 9 or byte == 26 or byte == 13) {
+                    try stdout.print("{s}{s}.{s}", .{ colors.bold, colors.escapeColors, colors.reset });
+                } else if (byte == 255 or byte == 127 or byte == 32) {
+                    try stdout.print("{s}{s}.{s}", .{ colors.bold, colors.formatColors, colors.reset });
                 } else {
                     try stdout.print("{s}{s}.{s}", .{ colors.bold, colors.binColors, colors.reset });
                 }

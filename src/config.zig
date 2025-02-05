@@ -28,11 +28,10 @@ pub const Config = struct {
         var arena = ArenaAllocator.init(allocator);
 
         // Try to read the config file
-        const file = std.fs.cwd().openFile(".config/binpeek.toml", .{}) catch |err| {
+        const file = std.fs.cwd().openFile("~/.config/binpeek.toml", .{}) catch |err| {
             if (err == error.FileNotFound) {
-                std.debug.print("err fnf\n", .{});
-                return err;
-                //return Config.init();
+                //std.debug.print("Error, no config file found. ", .{});
+                return Config.init();
             }
             return err;
         };

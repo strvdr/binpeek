@@ -22,6 +22,32 @@
    zig build -Doptimize=ReleaseFast
    ```
 
+4. Optional: Move binpeek to `/usr/local/bin` and change config path. From the directory above binpeek:
+   ```
+    mv /binpeek/zig-out/bin/binpeek /usr/local/bin
+    mv /binpeek/.config/binpeek.toml ~/.config/
+   ```
+
+## Configuration
+**binpeek** has color customizability. Currently, we use ANSI escape codes to add color to the output as it is relatively ubiquitous and works with most terminals and operating systems. However, the potential to add complete themes to **binpeek** remains relatively straightforward if you're up for the task. 
+
+If not, there are a few default colors that **binpeek** works with. Inside binpeek.toml, you can set the following colors:
+```
+    ASCII Colors 'asciiColors'
+    Binary Colors 'binColors'
+    Format Colors 'formatColors'
+    Escape Colors 'escapeColors'
+```
+to any of the following options:
+```
+    red
+    green
+    blue
+    cyan
+    yellow
+    magenta
+```
+
 ## Usage
 
 Run `binpeek` with a filename to view its hexdump:
